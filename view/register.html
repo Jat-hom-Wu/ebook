@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Kodinger">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>My Login Page &mdash; Bootstrap 4 Login Page Snippet</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/my-login.css">
+</head>
+<body class="my-login-page">
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-md-center h-100">
+				<div class="card-wrapper">
+					<div class="brand">
+						<img src="img/logo.jpg" alt="bootstrap 4 login page">
+					</div>
+					<div class="card fat">
+						<div class="card-body">
+							<h4 class="card-title">Register</h4>
+							<form method="POST" class="my-login-validation" novalidate="">
+								<div class="form-group">
+									<label for="name">Name</label>
+									<input id="name" type="text" class="form-control" name="name" required autofocus>
+									<div class="invalid-feedback">
+										What's your name?
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="password">Password</label>
+									<input id="password" type="password" class="form-control" name="password" required data-eye>
+									<div class="invalid-feedback">
+										Password is required
+									</div>
+								</div>
+
+								<ul id="info">
+
+								</ul>
+
+								<div class="form-group m-0">
+									<button type="submit" class="btn btn-primary btn-block" id="register" onclick="return false;">
+										Register
+									</button>
+								</div>
+								<div class="mt-4 text-center">
+									Already have an account? <a href="index.html">Login</a>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="footer">
+						Copyright &copy; 2017 &mdash; Your Company 
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="js/my-login.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	<script>
+		$("#register").click(function(){
+			var data = {
+				"user":$("#name").val(),
+				"password":$("#password").val(),
+			};
+			console.log(data)
+			$.ajax({
+				url: "http://159.75.2.47:9999/ebook/register",
+            	method: "POST",
+				data: JSON.stringify(data),
+				success:function(result, status, xhr){
+					var resJson = xhr.responseJSON;
+					if(resJson != null){
+						if (resJson.Code == 0){
+							console.log("code == 0")
+							var registerSuccess = $('<p><font color = "red">successfully register</front></p>')
+							$("#info").empty();
+                    		$("#info").append(registerSuccess);
+							setTimeout(function(){
+                            window.location.href="http://159.75.2.47:9998/login.html";
+                        }, 2000);
+						}else if (resJson.Code == 1){
+							console.log("code = 1")
+							var registerFailed = $('<p><font color = "red">user name already exists</front></p>')
+							$("#info").empty();
+                    		$("#info").append(registerFailed);
+						}else{
+							console.log("code not 0 or 1")
+						}
+					}
+					
+				},
+				error: function(xhr, status, error){
+
+				},
+				complete:function(xhr, status){
+
+				}
+			});
+		});
+	</script>
+
+</body>
+</html>

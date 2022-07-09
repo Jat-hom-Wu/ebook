@@ -1,0 +1,3 @@
+[INFO][log_test.go:25]2022/06/27 19:09:40 hello
+[INFO][log_test.go:25]2022/06/27 19:10:07 hello
+[ERROR][log_test.go:26]2022/06/27 19:10:07 nonono
