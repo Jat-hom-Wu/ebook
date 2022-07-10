@@ -15,6 +15,7 @@ func InitRouter() {
 	group := r.Group("/ebook")
 	{
 		group.POST("/login", api.LoginHandler)
+		group.POST("/rpclogin", api.RpcLoginHandler)
 		group.POST("/register", api.RegisterHandler)
 		group.GET("/test", testHandler)
 	}

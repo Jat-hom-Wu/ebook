@@ -3,7 +3,7 @@
 
 -- 随机化请求查询参数
 request = function()
-    local rand_idx = math.random(20000000, 10000000)
+    local rand_idx = math.random(10000000, 12000000)
     -- local tracking_number = tns[rand_idx]
     local user_name = "stress_test_"..rand_idx
     local method = "POST"

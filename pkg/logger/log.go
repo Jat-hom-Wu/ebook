@@ -46,7 +46,6 @@ func SetUpLog(fileName, filePath string){
 		log.Fatalf("logger set up failed:%v\n", err)
 	}
 	logging = log.New(f, defaultPrefix, log.LstdFlags)
-	log.Println("asdf")
 }
 
 func Info(v ...interface{}){
